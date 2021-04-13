@@ -1,6 +1,6 @@
 import React from 'react';
-import {signin} from '../../actions/auth';
-import {useState} from 'react'
+import {signin,authenticate,isAuth} from '../../actions/auth';
+import {useState, useEffect} from 'react'
 import Router from 'next/router';
 
 const SigninComponent=()=>{
@@ -14,6 +14,10 @@ const SigninComponent=()=>{
 
     });
 
+    useEffect(()=>{
+        isAuth()&& Router.push('/')
+
+    },[])
     const {email,password,error,loading,message,showForm }= values;
 
     const handelSubmit = e =>{
@@ -27,7 +31,9 @@ const SigninComponent=()=>{
 
             }
             else{
-                Router.push('/');
+
+                authenticate(data,()=>{ Router.push('/')})
+               
 
             }
         });
