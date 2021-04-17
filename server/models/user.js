@@ -27,6 +27,12 @@ const User = new Schema({
         lowecase:true
 
     },
+    posts : [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Post"
+        }
+      ],
     //passeword
     profile : {
         type: String,
